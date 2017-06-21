@@ -1,0 +1,16 @@
+<style>
+    ${require('./style.scss')}
+</style>
+<div id="cb-bread" class="cb-btn cb-bread">
+    <span></span>
+    <span></span>
+</div>
+<div id="cb-menu" class="cb-menu">
+    <!-- Default slot -->
+    <slot class="cb-menu-items"></slot>
+    <div class="cb-menu-more">
+        <!-- if more than 4 menu items, more opens up 
+             full page menu with all menu items -->
+        <!-- <slot name="more"></slot>-->
+    </div>
+</div>
