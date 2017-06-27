@@ -2,34 +2,32 @@
 
 }
 
-cb-btn {
+:host[menu-open] {
+    
+}
+
+.cb-btn {
+    cursor: pointer;
+
     &:hover {
 
     }
 }
 
-cb-bread {
+.cb-sandwich {
     display: inline-block;
-    cursor: pointer;
 
-    span {
+    .cb-bread {
+        display: block;
         width: 35px;
         height: 5px;
         background-color: #333;
         margin: 6px 0;
         transition: 0.4s;
     }
-    &:first-child {
-        -webkit-transform: rotate(-45deg) translate(-9px, 6px) ;
-        transform: rotate(-45deg) translate(-9px, 6px) ;
-    }
-    &:last-child {
-        -webkit-transform: rotate(45deg) translate(-8px, -8px) ;
-        transform: rotate(45deg) translate(-8px, -8px) ;
-    }
 }
 
-cb-menu {
+.cb-menu {
     & ::slotted(*) {
 
     }

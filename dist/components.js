@@ -86,6 +86,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+const ATTR_MENU_OPEN = 'menu-open';
+
 class CBMenu extends HTMLElement {
 
     constructor() {
@@ -94,7 +96,57 @@ class CBMenu extends HTMLElement {
         shadowRoot.innerHTML = __WEBPACK_IMPORTED_MODULE_0__template_html___default.a;
     }
 
-    connectedCallback() { }
+    connectedCallback() {
+        this._addButtonListeners();
+    }
+
+    static get observedAttributes() {
+        return [ATTR_MENU_OPEN];
+    }
+
+    attributeChangedCallback(attr, oldValue, newValue) {
+        switch (attr) {
+            case ATTR_MENU_OPEN:
+                this._applyMenuOpen();
+                return;
+        }
+    }
+
+    get menuOpen() {
+        return this.hasAttribute(ATTR_MENU_OPEN);
+    }
+
+    set menuOpen(val) {
+        if (val) {
+            this.setAttribute(ATTR_MENU_OPEN, '');
+        } else {
+            this.removeAttribute(ATTR_MENU_OPEN);
+        }
+    }
+
+    _addButtonListeners() {
+        let menuBtn = this.shadowRoot.querySelector('#cb-sandwich');
+        menuBtn.addEventListener('click', () => this._toggleMenu());
+    }
+
+    _applyMenuOpen() {
+        let menu = this.shadowRoot.querySelector("#cb-menu");
+
+        if (this.menuOpen) {
+            // Get # of children, set height to menu item pixel height * # of children
+            // if # of children > 4, apply more menu item
+            menu.style.maxHeight = menu.scrollHeight + 'px';
+            //transformIcon(this.shadowRoot.querySelector('.mobile-menu-button'));
+        } else {
+            menu.style.maxHeight = null;
+            //revertIcon(this.shadowRoot.querySelector('.mobile-menu-button'));
+        }
+    }
+
+
+    _toggleMenu() {
+        this.menuOpen = !this.menuOpen;
+    }
 }
 
 window.customElements.define('cb-menu', CBMenu);
@@ -104,7 +156,7 @@ window.CBMenu = CBMenu;
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = "<style>\n    " + __webpack_require__(3) + "\n</style>\n<div id=\"cb-bread\" class=\"cb-btn cb-bread\">\n    <span></span>\n    <span></span>\n</div>\n<div id=\"cb-menu\" class=\"cb-menu\">\n    <!-- Default slot -->\n    <slot class=\"cb-menu-items\"></slot>\n    <div class=\"cb-menu-more\">\n        <!-- if more than 4 menu items, more opens up \n             full page menu with all menu items -->\n        <!-- <slot name=\"more\"></slot>-->\n    </div>\n</div>\n";
+module.exports = "<style>\n    " + __webpack_require__(3) + "\n</style>\n<div id=\"cb-sandwich\" class=\"cb-btn cb-sandwich\">\n    <span class=\"cb-bread\"></span>\n    <span class=\"cb-bread\"></span>\n</div>\n<div id=\"cb-menu\" class=\"cb-menu\">\n    <!-- Default slot -->\n    <slot class=\"cb-menu-items\"></slot>\n    <div class=\"cb-menu-more\">\n        <!-- if more than 4 menu items, more opens up \n             full page menu with all menu items -->\n        <!-- <slot name=\"more\"></slot>-->\n    </div>\n</div>\n";
 
 /***/ }),
 /* 3 */
@@ -115,7 +167,7 @@ exports = module.exports = __webpack_require__(4)(undefined);
 
 
 // module
-exports.push([module.i, "cb-bread{display:inline-block;cursor:pointer}cb-bread span{width:35px;height:5px;background-color:#333;margin:6px 0;transition:.4s}cb-bread:first-child{-webkit-transform:rotate(-45deg) translate(-9px,6px);transform:rotate(-45deg) translate(-9px,6px)}cb-bread:last-child{-webkit-transform:rotate(45deg) translate(-8px,-8px);transform:rotate(45deg) translate(-8px,-8px)}cb-menu .cb-menu-more{display:none}", ""]);
+exports.push([module.i, ":host[menu-open] .cb-sandwich .cb-bread:first-child{-webkit-transform:rotate(-45deg) translate(-9px,6px);transform:rotate(-45deg) translate(-9px,6px)}:host[menu-open] .cb-sandwich .cb-bread:last-child{-webkit-transform:rotate(45deg) translate(-8px,-8px);transform:rotate(45deg) translate(-8px,-8px)}.cb-btn{cursor:pointer}.cb-sandwich{display:inline-block}.cb-sandwich .cb-bread{display:block;width:35px;height:5px;background-color:#333;margin:6px 0;transition:.4s}.cb-menu .cb-menu-more{display:none}", ""]);
 
 // exports
 
