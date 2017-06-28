@@ -48,7 +48,9 @@ module.exports = {
                     options: {
                         // attrs: ['link:href'],
                         interpolate: true,
-                        // minimize: true
+                        // minimize: true,
+                        // removeComments: true,
+                        // collapseWhitespace: true
                     },
                 },
             },

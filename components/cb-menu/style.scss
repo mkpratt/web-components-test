@@ -1,9 +1,13 @@
 :host {
-
+    .cb-menu-item-container {
+        display: none;
+    }
 }
 
-:host[menu-open] {
-    
+:host([menu-open]) {
+    .cb-menu-item-container {
+        display: flex;
+    }
 }
 
 .cb-btn {
@@ -27,9 +31,26 @@
     }
 }
 
-.cb-menu {
-    & ::slotted(*) {
+.cb-menu-item-container {
+    flex-direction: column;
+    position: absolute;
+    margin-left: 50px;
+    margin-top: -23px;
+    text-align: center;
+    color: #e8e8e8;
 
+    background: #2c3e50; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(top left, rgba(41, 128, 185, .6), rgba(44, 62, 80, .6));
+    background: -moz-linear-gradient(top left, rgba(41, 128, 185, .6), rgba(44, 62, 80, .6));
+    background: -o-linear-gradient(top left, rgba(41, 128, 185, .6), rgba(44, 62, 80, .6));
+    background: linear-gradient(to bottom right, rgba(41, 128, 185, .6), rgba(44, 62, 80, .6));
+    // Instead of gradient, do filter blur over background image (https://codepen.io/betravis/pen/ztyDm)
+
+    & ::slotted(*) {
+        display: inline-block;
+        //padding: 12px 20px;
+        min-width: 158px;
+        margin: 16px auto;
     }
 
     & ::slotted(*:hover) {

@@ -51,7 +51,12 @@ class CBMenu extends HTMLElement {
         if (this.menuOpen) {
             // Get # of children, set height to menu item pixel height * # of children
             // if # of children > 4, apply more menu item
-            menu.style.maxHeight = menu.scrollHeight + 'px';
+            let nodes = menu.querySelectorAll('slot')[0].assignedNodes();
+            let filteredNodes = nodes.filter(function (node) { return node instanceof HTMLElement });
+
+            const length = filteredNodes.length;
+            //menu.style.maxHeight = length * 24 + 'px';
+            //menu.style.maxHeight = menu.scrollHeight + 'px';
             //transformIcon(this.shadowRoot.querySelector('.mobile-menu-button'));
         } else {
             menu.style.maxHeight = null;

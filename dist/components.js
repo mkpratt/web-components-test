@@ -135,7 +135,12 @@ class CBMenu extends HTMLElement {
         if (this.menuOpen) {
             // Get # of children, set height to menu item pixel height * # of children
             // if # of children > 4, apply more menu item
-            menu.style.maxHeight = menu.scrollHeight + 'px';
+            let nodes = menu.querySelectorAll('slot')[0].assignedNodes();
+            let filteredNodes = nodes.filter(function (node) { return node instanceof HTMLElement });
+
+            const length = filteredNodes.length;
+            //menu.style.maxHeight = length * 24 + 'px';
+            //menu.style.maxHeight = menu.scrollHeight + 'px';
             //transformIcon(this.shadowRoot.querySelector('.mobile-menu-button'));
         } else {
             menu.style.maxHeight = null;
@@ -156,7 +161,7 @@ window.CBMenu = CBMenu;
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = "<style>\n    " + __webpack_require__(3) + "\n</style>\n<div id=\"cb-sandwich\" class=\"cb-btn cb-sandwich\">\n    <span class=\"cb-bread\"></span>\n    <span class=\"cb-bread\"></span>\n</div>\n<div id=\"cb-menu\" class=\"cb-menu\">\n    <!-- Default slot -->\n    <slot class=\"cb-menu-items\"></slot>\n    <div class=\"cb-menu-more\">\n        <!-- if more than 4 menu items, more opens up \n             full page menu with all menu items -->\n        <!-- <slot name=\"more\"></slot>-->\n    </div>\n</div>\n";
+module.exports = "<style>\n    " + __webpack_require__(3) + "\n</style>\n<div id=\"cb-sandwich\" class=\"cb-btn cb-sandwich\">\n    <span class=\"cb-bread\"></span>\n    <span class=\"cb-bread\"></span>\n</div>\n<div id=\"cb-menu\" class=\"cb-menu-item-container\">\n    <!-- Default slot -->\n    <slot class=\"cb-menu-items\"></slot>\n    <div class=\"cb-menu-more\">\n        <!-- if more than 4 menu items, more opens up \n             full page menu with all menu items -->\n        <!-- <slot name=\"more\"></slot>-->\n    </div>\n</div>\n";
 
 /***/ }),
 /* 3 */
@@ -167,7 +172,7 @@ exports = module.exports = __webpack_require__(4)(undefined);
 
 
 // module
-exports.push([module.i, ":host[menu-open] .cb-sandwich .cb-bread:first-child{-webkit-transform:rotate(-45deg) translate(-9px,6px);transform:rotate(-45deg) translate(-9px,6px)}:host[menu-open] .cb-sandwich .cb-bread:last-child{-webkit-transform:rotate(45deg) translate(-8px,-8px);transform:rotate(45deg) translate(-8px,-8px)}.cb-btn{cursor:pointer}.cb-sandwich{display:inline-block}.cb-sandwich .cb-bread{display:block;width:35px;height:5px;background-color:#333;margin:6px 0;transition:.4s}.cb-menu .cb-menu-more{display:none}", ""]);
+exports.push([module.i, ":host .cb-menu-item-container{display:none}:host([menu-open]) .cb-menu-item-container{display:flex}.cb-btn{cursor:pointer}.cb-sandwich{display:inline-block}.cb-sandwich .cb-bread{display:block;width:35px;height:5px;background-color:#333;margin:6px 0;transition:.4s}.cb-menu-item-container{flex-direction:column;position:absolute;margin-left:50px;margin-top:-23px;text-align:center;color:#e8e8e8;background:#2c3e50;background:-webkit-linear-gradient(top left,rgba(41,128,185,.6),rgba(44,62,80,.6));background:-moz-linear-gradient(top left,rgba(41,128,185,.6),rgba(44,62,80,.6));background:-o-linear-gradient(top left,rgba(41,128,185,.6),rgba(44,62,80,.6));background:linear-gradient(to bottom right,rgba(41,128,185,.6),rgba(44,62,80,.6))}.cb-menu-item-container ::slotted(*){display:inline-block;min-width:158px;margin:16px auto}.cb-menu-item-container .cb-menu-more{display:none}", ""]);
 
 // exports
 
