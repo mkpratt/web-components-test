@@ -136,6 +136,7 @@ class CBMenu extends HTMLElement {
             // Get # of children, set height to menu item pixel height * # of children
             // if # of children > 4, apply more menu item
             let nodes = menu.querySelectorAll('slot')[0].assignedNodes();
+            // filter out non-htmlelement nodes
             let filteredNodes = nodes.filter(function (node) { return node instanceof HTMLElement });
 
             const length = filteredNodes.length;
