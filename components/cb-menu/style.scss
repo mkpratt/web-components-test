@@ -20,14 +20,68 @@
 
 .cb-sandwich {
     display: inline-block;
+    cursor: pointer;
 
     .cb-bread {
         display: block;
-        width: 35px;
-        height: 5px;
+        width: 28px;
+        height: 3px;
         background-color: #333;
         margin: 6px 0;
-        transition: 0.4s;
+        //transition: .4s;
+        border-radius: 2px;
+
+        -webkit-transition: -webkit-transform 0.25s cubic-bezier(0.4, 0.01, 0.165, 0.99);
+        transition: -webkit-transform 0.25s cubic-bezier(0.4, 0.01, 0.165, 0.99);
+        transition: transform 0.25s cubic-bezier(0.4, 0.01, 0.165, 0.99);
+        transition: transform 0.25s cubic-bezier(0.4, 0.01, 0.165, 0.99), -webkit-transform 0.25s cubic-bezier(0.4, 0.01, 0.165, 0.99);
+        -webkit-transform: rotate(0);
+        -ms-transform: rotate(0);
+        transform: rotate(0);
+    }
+
+    .cb-bread:first-child {
+        -webkit-transition: -webkit-transform 0.25s cubic-bezier(0.4, 0.01, 0.165, 0.99);
+        transition: -webkit-transform 0.25s cubic-bezier(0.4, 0.01, 0.165, 0.99);
+        transition: transform 0.25s cubic-bezier(0.4, 0.01, 0.165, 0.99);
+        transition: transform 0.25s cubic-bezier(0.4, 0.01, 0.165, 0.99), -webkit-transform 0.25s cubic-bezier(0.4, 0.01, 0.165, 0.99);
+        -webkit-transform: rotate(0);
+        -ms-transform: rotate(0);
+        transform: rotate(0);
+    }
+    .cb-bread:last-child {
+        -webkit-transition: -webkit-transform 0.25s cubic-bezier(0.4, 0.01, 0.165, 0.99);
+        transition: -webkit-transform 0.25s cubic-bezier(0.4, 0.01, 0.165, 0.99);
+        transition: transform 0.25s cubic-bezier(0.4, 0.01, 0.165, 0.99);
+        transition: transform 0.25s cubic-bezier(0.4, 0.01, 0.165, 0.99), -webkit-transform 0.25s cubic-bezier(0.4, 0.01, 0.165, 0.99);
+        -webkit-transform: rotate(0);
+        -ms-transform: rotate(0);
+        transform: rotate(0);
+    }
+
+    &.open {
+        .cb-bread:first-child {
+            //-webkit-animation: top-bread 0.68s forwards;
+            //animation: top-bread 0.68s forwards;
+            -webkit-transition: -webkit-transform 0.25s 0.2s cubic-bezier(0.4, 0.01, 0.165, 0.99);
+            transition: -webkit-transform 0.25s 0.2s cubic-bezier(0.4, 0.01, 0.165, 0.99);
+            transition: transform 0.25s 0.2s cubic-bezier(0.4, 0.01, 0.165, 0.99);
+            transition: transform 0.25s 0.2s cubic-bezier(0.4, 0.01, 0.165, 0.99), -webkit-transform 0.25s 0.2s cubic-bezier(0.4, 0.01, 0.165, 0.99);
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+        .cb-bread:last-child {
+            //-webkit-animation: bottom-bread 0.68s forwards;
+            //animation: bottom-bread 0.68s forwards;
+            -webkit-transition: -webkit-transform 0.25s 0.2s cubic-bezier(0.4, 0.01, 0.165, 0.99);
+            transition: -webkit-transform 0.25s 0.2s cubic-bezier(0.4, 0.01, 0.165, 0.99);
+            transition: transform 0.25s 0.2s cubic-bezier(0.4, 0.01, 0.165, 0.99);
+            transition: transform 0.25s 0.2s cubic-bezier(0.4, 0.01, 0.165, 0.99), -webkit-transform 0.25s 0.2s cubic-bezier(0.4, 0.01, 0.165, 0.99);
+            -webkit-transform: rotate(-45deg);
+            -ms-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+        }
     }
 }
 
@@ -37,6 +91,7 @@
     margin-left: 50px;
     margin-top: -23px;
     text-align: center;
+    border-radius: 3px;
     color: #e8e8e8;
 
     background: #2c3e50; /* For browsers that do not support gradients */
@@ -50,14 +105,62 @@
         display: inline-block;
         //padding: 12px 20px;
         min-width: 158px;
-        margin: 16px auto;
+        margin: 0 auto;
+        padding: 16px 0;
+        cursor: pointer;
     }
 
     & ::slotted(*:hover) {
-    
+        color: red;
     }
 
     .cb-menu-more {
         display: none;
     }
+}
+
+//transform: rotate(45deg) translate(7px, 1px);
+@-webkit-keyframes top-bread {
+    33%  {transform: rotate(90deg) translate(8px, -5px);}
+    66% {transform: rotate(90deg) translate(9px, 0px);}
+    100% {transform: rotate(45deg) translate(7px, 3px);}
+}
+@keyframes top-bread {
+    33%  {transform: rotate(90deg) translate(8px, -5px);}
+    66% {transform: rotate(90deg) translate(9px, 0px);}
+    100% {transform: rotate(45deg) translate(7px, 3px);}
+}
+
+@-webkit-keyframes bottom-bread {
+    33%  {transform: rotate(90deg) translate(-1px, 4px);}
+    66% {transform: rotate(90deg) translate(0px, 0px);}
+    100% {transform: rotate(135deg) translate(-3px, 0px);}
+}
+@keyframes bottom-bread {
+    33%  {transform: rotate(90deg) translate(-1px, 4px);}
+    66% {transform: rotate(90deg) translate(0px, 0px);}
+    100% {transform: rotate(135deg) translate(-3px, 0px);}
+}
+
+
+@-webkit-keyframes top-bread-reverse {
+    33% {transform: rotate(45deg) translate(7px, 3px);}
+    66% {transform: rotate(90deg) translate(9px, 0px);}
+    100%  {transform: rotate(90deg) translate(8px, -5px);}
+}
+@keyframes top-bread-reverse {
+    33% {transform: rotate(45deg) translate(7px, 3px);}
+    66% {transform: rotate(90deg) translate(9px, 0px);}
+    100%  {transform: rotate(90deg) translate(8px, -5px);}
+}
+
+@-webkit-keyframes bottom-bread-reverse {
+    33% {transform: rotate(135deg) translate(-3px, 0px);}
+    66% {transform: rotate(90deg) translate(0px, 0px);}
+    100%  {transform: rotate(90deg) translate(-1px, 4px);}
+}
+@keyframes bottom-bread-reverse {
+    33% {transform: rotate(135deg) translate(-3px, 0px);}
+    66% {transform: rotate(90deg) translate(0px, 0px);}
+    100%  {transform: rotate(90deg) translate(-1px, 4px);}
 }
