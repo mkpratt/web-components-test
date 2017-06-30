@@ -59,14 +59,16 @@ class CBMenu extends HTMLElement {
             //menu.style.maxHeight = length * 24 + 'px';
             //menu.style.maxHeight = menu.scrollHeight + 'px';
             //transformIcon(this.shadowRoot.querySelector('.mobile-menu-button'));
-            this.shadowRoot.querySelector("#cb-sandwich").classList.add("open");
+            var sandwich = this.shadowRoot.querySelector("#cb-sandwich");
+            // sandwich.firstChild.classList.add(";
+            // var bottom_bread = sandwich.lastChild;
+            sandwich.classList.add("open");
         } else {
-            menu.style.maxHeight = null;
+            //menu.style.maxHeight = null;
             //revertIcon(this.shadowRoot.querySelector('.mobile-menu-button'));
             this.shadowRoot.querySelector("#cb-sandwich").classList.remove("open");
         }
     }
-
 
     _toggleMenu() {
         this.menuOpen = !this.menuOpen;

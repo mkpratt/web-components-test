@@ -35,52 +35,25 @@
         transition: -webkit-transform 0.25s cubic-bezier(0.4, 0.01, 0.165, 0.99);
         transition: transform 0.25s cubic-bezier(0.4, 0.01, 0.165, 0.99);
         transition: transform 0.25s cubic-bezier(0.4, 0.01, 0.165, 0.99), -webkit-transform 0.25s cubic-bezier(0.4, 0.01, 0.165, 0.99);
-        -webkit-transform: rotate(0);
-        -ms-transform: rotate(0);
-        transform: rotate(0);
     }
 
     .cb-bread:first-child {
-        -webkit-transition: -webkit-transform 0.25s cubic-bezier(0.4, 0.01, 0.165, 0.99);
-        transition: -webkit-transform 0.25s cubic-bezier(0.4, 0.01, 0.165, 0.99);
-        transition: transform 0.25s cubic-bezier(0.4, 0.01, 0.165, 0.99);
-        transition: transform 0.25s cubic-bezier(0.4, 0.01, 0.165, 0.99), -webkit-transform 0.25s cubic-bezier(0.4, 0.01, 0.165, 0.99);
-        -webkit-transform: rotate(0);
-        -ms-transform: rotate(0);
-        transform: rotate(0);
+        -webkit-animation: top-bread-reverse 0.68s forwards;
+        animation: top-bread-reverse 0.68s forwards;
     }
     .cb-bread:last-child {
-        -webkit-transition: -webkit-transform 0.25s cubic-bezier(0.4, 0.01, 0.165, 0.99);
-        transition: -webkit-transform 0.25s cubic-bezier(0.4, 0.01, 0.165, 0.99);
-        transition: transform 0.25s cubic-bezier(0.4, 0.01, 0.165, 0.99);
-        transition: transform 0.25s cubic-bezier(0.4, 0.01, 0.165, 0.99), -webkit-transform 0.25s cubic-bezier(0.4, 0.01, 0.165, 0.99);
-        -webkit-transform: rotate(0);
-        -ms-transform: rotate(0);
-        transform: rotate(0);
+        -webkit-animation: bottom-bread-reverse 0.68s forwards;
+        animation: bottom-bread-reverse 0.68s forwards;
     }
 
     &.open {
         .cb-bread:first-child {
-            //-webkit-animation: top-bread 0.68s forwards;
-            //animation: top-bread 0.68s forwards;
-            -webkit-transition: -webkit-transform 0.25s 0.2s cubic-bezier(0.4, 0.01, 0.165, 0.99);
-            transition: -webkit-transform 0.25s 0.2s cubic-bezier(0.4, 0.01, 0.165, 0.99);
-            transition: transform 0.25s 0.2s cubic-bezier(0.4, 0.01, 0.165, 0.99);
-            transition: transform 0.25s 0.2s cubic-bezier(0.4, 0.01, 0.165, 0.99), -webkit-transform 0.25s 0.2s cubic-bezier(0.4, 0.01, 0.165, 0.99);
-            -webkit-transform: rotate(45deg);
-            -ms-transform: rotate(45deg);
-            transform: rotate(45deg);
+            -webkit-animation: top-bread 0.68s forwards;
+            animation: top-bread 0.68s forwards;
         }
         .cb-bread:last-child {
-            //-webkit-animation: bottom-bread 0.68s forwards;
-            //animation: bottom-bread 0.68s forwards;
-            -webkit-transition: -webkit-transform 0.25s 0.2s cubic-bezier(0.4, 0.01, 0.165, 0.99);
-            transition: -webkit-transform 0.25s 0.2s cubic-bezier(0.4, 0.01, 0.165, 0.99);
-            transition: transform 0.25s 0.2s cubic-bezier(0.4, 0.01, 0.165, 0.99);
-            transition: transform 0.25s 0.2s cubic-bezier(0.4, 0.01, 0.165, 0.99), -webkit-transform 0.25s 0.2s cubic-bezier(0.4, 0.01, 0.165, 0.99);
-            -webkit-transform: rotate(-45deg);
-            -ms-transform: rotate(-45deg);
-            transform: rotate(-45deg);
+            -webkit-animation: bottom-bread 0.68s forwards;
+            animation: bottom-bread 0.68s forwards;
         }
     }
 }
@@ -95,10 +68,10 @@
     color: #e8e8e8;
 
     background: #2c3e50; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(top left, rgba(41, 128, 185, .6), rgba(44, 62, 80, .6));
-    background: -moz-linear-gradient(top left, rgba(41, 128, 185, .6), rgba(44, 62, 80, .6));
-    background: -o-linear-gradient(top left, rgba(41, 128, 185, .6), rgba(44, 62, 80, .6));
-    background: linear-gradient(to bottom right, rgba(41, 128, 185, .6), rgba(44, 62, 80, .6));
+    // background: -webkit-linear-gradient(top left, rgba(41, 128, 185, .6), rgba(44, 62, 80, .6));
+    // background: -moz-linear-gradient(top left, rgba(41, 128, 185, .6), rgba(44, 62, 80, .6));
+    // background: -o-linear-gradient(top left, rgba(41, 128, 185, .6), rgba(44, 62, 80, .6));
+    // background: linear-gradient(to bottom right, rgba(41, 128, 185, .6), rgba(44, 62, 80, .6));
     // Instead of gradient, do filter blur over background image (https://codepen.io/betravis/pen/ztyDm)
 
     & ::slotted(*) {
@@ -120,47 +93,53 @@
 }
 
 //transform: rotate(45deg) translate(7px, 1px);
-@-webkit-keyframes top-bread {
-    33%  {transform: rotate(90deg) translate(8px, -5px);}
-    66% {transform: rotate(90deg) translate(9px, 0px);}
-    100% {transform: rotate(45deg) translate(7px, 3px);}
-}
+// @-webkit-keyframes top-bread {
+//     33%  {transform: rotate(90deg) translate(8px, -5px);}
+//     66% {transform: rotate(90deg) translate(9px, 0px);}
+//     100% {transform: rotate(135deg) translate(4px, -3px);}
+// }
 @keyframes top-bread {
     33%  {transform: rotate(90deg) translate(8px, -5px);}
     66% {transform: rotate(90deg) translate(9px, 0px);}
-    100% {transform: rotate(45deg) translate(7px, 3px);}
+    100% {transform: rotate(135deg) translate(4px, -3px);}
 }
 
-@-webkit-keyframes bottom-bread {
-    33%  {transform: rotate(90deg) translate(-1px, 4px);}
-    66% {transform: rotate(90deg) translate(0px, 0px);}
-    100% {transform: rotate(135deg) translate(-3px, 0px);}
-}
+// @-webkit-keyframes bottom-bread {
+//     33%  {transform: rotate(90deg) translate(-1px, 4px);}
+//     66% {transform: rotate(90deg) translate(0px, 0px);}
+//     100% {transform: rotate(45deg) translate(-3px, -2px);}
+// }
 @keyframes bottom-bread {
     33%  {transform: rotate(90deg) translate(-1px, 4px);}
     66% {transform: rotate(90deg) translate(0px, 0px);}
-    100% {transform: rotate(135deg) translate(-3px, 0px);}
+    100% {transform: rotate(45deg) translate(-3px, -2px);}
 }
 
 
-@-webkit-keyframes top-bread-reverse {
-    33% {transform: rotate(45deg) translate(7px, 3px);}
-    66% {transform: rotate(90deg) translate(9px, 0px);}
-    100%  {transform: rotate(90deg) translate(8px, -5px);}
-}
+// @-webkit-keyframes top-bread-reverse {
+//     0% {transform: rotate(135deg) translate(4px, -3px);}
+//     //100% {transform: rotate(180deg) translate(7px, 3px);}
+//     // 66%  {transform: rotate(90deg) translate(8px, -5px);}
+//     // 100% {transform: rotate(90deg) translate(9px, 0px);}
+// }
 @keyframes top-bread-reverse {
-    33% {transform: rotate(45deg) translate(7px, 3px);}
-    66% {transform: rotate(90deg) translate(9px, 0px);}
-    100%  {transform: rotate(90deg) translate(8px, -5px);}
+    0% {transform: rotate(135deg) translate(4px, -3px);}
+    50% {transform: rotate(180deg) translate(0px, -6px);}
+    100% {transform: rotate(180deg) translate(0px, -3px);}
+    //100% {transform: rotate(180deg) translate(7px, 3px);}
+    // 66%  {transform: rotate(90deg) translate(8px, -5px);}
+    // 100% {transform: rotate(90deg) translate(9px, 0px);}
 }
 
-@-webkit-keyframes bottom-bread-reverse {
-    33% {transform: rotate(135deg) translate(-3px, 0px);}
-    66% {transform: rotate(90deg) translate(0px, 0px);}
-    100%  {transform: rotate(90deg) translate(-1px, 4px);}
-}
+// @-webkit-keyframes bottom-bread-reverse {
+//     0% {transform: rotate(45deg) translate(-3px, -2px);}
+//     // 66%  {transform: rotate(90deg) translate(-1px, 4px);}
+//     // 100% {transform: rotate(90deg) translate(0px, 0px);}
+// }
 @keyframes bottom-bread-reverse {
-    33% {transform: rotate(135deg) translate(-3px, 0px);}
-    66% {transform: rotate(90deg) translate(0px, 0px);}
-    100%  {transform: rotate(90deg) translate(-1px, 4px);}
+    0% {transform: rotate(45deg) translate(-3px, -2px);}
+    50% {transform: rotate(180deg) translate(0px, 2px);}
+    100% {transform: rotate(180deg) translate(0px, -2px);}
+    // 66%  {transform: rotate(90deg) translate(-1px, 4px);}
+    // 100% {transform: rotate(90deg) translate(0px, 0px);}
 }
