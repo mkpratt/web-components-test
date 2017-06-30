@@ -131,6 +131,7 @@ class CBMenu extends HTMLElement {
 
     _applyMenuOpen() {
         let menu = this.shadowRoot.querySelector("#cb-menu");
+        this.shadowRoot.querySelector('#cb-sandwich').classList.remove("preload");
 
         if (this.menuOpen) {
             // Get # of children, set height to menu item pixel height * # of children
@@ -142,14 +143,9 @@ class CBMenu extends HTMLElement {
             const length = filteredNodes.length;
             //menu.style.maxHeight = length * 24 + 'px';
             //menu.style.maxHeight = menu.scrollHeight + 'px';
-            //transformIcon(this.shadowRoot.querySelector('.mobile-menu-button'));
-            var sandwich = this.shadowRoot.querySelector("#cb-sandwich");
-            // sandwich.firstChild.classList.add(";
-            // var bottom_bread = sandwich.lastChild;
-            sandwich.classList.add("open");
+            this.shadowRoot.querySelector("#cb-sandwich").classList.add("open");
         } else {
             //menu.style.maxHeight = null;
-            //revertIcon(this.shadowRoot.querySelector('.mobile-menu-button'));
             this.shadowRoot.querySelector("#cb-sandwich").classList.remove("open");
         }
     }
@@ -166,7 +162,7 @@ window.CBMenu = CBMenu;
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = "<style>\n    " + __webpack_require__(3) + "\n</style>\n<div id=\"cb-sandwich\" class=\"cb-btn cb-sandwich\">\n    <span class=\"cb-bread\"></span>\n    <span class=\"cb-bread\"></span>\n</div>\n<div id=\"cb-menu\" class=\"cb-menu-item-container\">\n    <!-- Default slot -->\n    <slot class=\"cb-menu-items\"></slot>\n    <div class=\"cb-menu-more\">\n        <!-- if more than 4 menu items, more opens up \n             full page menu with all menu items -->\n        <!-- <slot name=\"more\"></slot>-->\n    </div>\n</div>\n";
+module.exports = "<style>\n    " + __webpack_require__(3) + "\n</style>\n<div id=\"cb-sandwich\" class=\"preload cb-btn cb-sandwich\">\n    <span class=\"cb-bread\"></span>\n    <span class=\"cb-bread\"></span>\n</div>\n<div id=\"cb-menu\" class=\"cb-menu-item-container\">\n    <!-- Default slot -->\n    <slot class=\"cb-menu-items\"></slot>\n    <div class=\"cb-menu-more\">\n        <!-- if more than 4 menu items, more opens up \n             full page menu with all menu items -->\n        <!-- <slot name=\"more\"></slot>-->\n    </div>\n</div>\n";
 
 /***/ }),
 /* 3 */
@@ -177,7 +173,7 @@ exports = module.exports = __webpack_require__(4)(undefined);
 
 
 // module
-exports.push([module.i, ":host .cb-menu-item-container{display:none}:host([menu-open]) .cb-menu-item-container{display:flex}.cb-btn,.cb-sandwich{cursor:pointer}.cb-sandwich{display:inline-block}.cb-sandwich .cb-bread{display:block;width:28px;height:3px;background-color:#333;margin:6px 0;border-radius:2px;-webkit-transition:-webkit-transform .25s cubic-bezier(.4,.01,.165,.99);transition:-webkit-transform .25s cubic-bezier(.4,.01,.165,.99);transition:transform .25s cubic-bezier(.4,.01,.165,.99);transition:transform .25s cubic-bezier(.4,.01,.165,.99),-webkit-transform .25s cubic-bezier(.4,.01,.165,.99)}.cb-sandwich .cb-bread:first-child{-webkit-animation:top-bread-reverse .68s forwards;animation:top-bread-reverse .68s forwards}.cb-sandwich .cb-bread:last-child{-webkit-animation:bottom-bread-reverse .68s forwards;animation:bottom-bread-reverse .68s forwards}.cb-sandwich.open .cb-bread:first-child{-webkit-animation:top-bread .68s forwards;animation:top-bread .68s forwards}.cb-sandwich.open .cb-bread:last-child{-webkit-animation:bottom-bread .68s forwards;animation:bottom-bread .68s forwards}.cb-menu-item-container{flex-direction:column;position:absolute;margin-left:50px;margin-top:-23px;text-align:center;border-radius:3px;color:#e8e8e8;background:#2c3e50}.cb-menu-item-container ::slotted(*){display:inline-block;min-width:158px;margin:0 auto;padding:16px 0;cursor:pointer}.cb-menu-item-container ::slotted(:hover){color:red}.cb-menu-item-container .cb-menu-more{display:none}@keyframes top-bread{33%{transform:rotate(90deg) translate(8px,-5px)}66%{transform:rotate(90deg) translate(9px)}to{transform:rotate(135deg) translate(4px,-3px)}}@keyframes bottom-bread{33%{transform:rotate(90deg) translate(-1px,4px)}66%{transform:rotate(90deg) translate(0)}to{transform:rotate(45deg) translate(-3px,-2px)}}@keyframes top-bread-reverse{0%{transform:rotate(135deg) translate(4px,-3px)}50%{transform:rotate(180deg) translateY(-6px)}to{transform:rotate(180deg) translateY(-3px)}}@keyframes bottom-bread-reverse{0%{transform:rotate(45deg) translate(-3px,-2px)}50%{transform:rotate(180deg) translateY(2px)}to{transform:rotate(180deg) translateY(-2px)}}", ""]);
+exports.push([module.i, ":host .cb-menu-item-container,:host .cb-menu-item-container ::slotted(*){height:0}:host([menu-open]) .cb-menu-item-container{height:100%}:host([menu-open]) .cb-menu-item-container ::slotted(*){height:auto!important;display:block!important;text-align:left!important;padding:18px 18px 18px 50px!important;width:100%;position:static;box-sizing:border-box;line-height:12px!important}.cb-btn,.cb-sandwich{cursor:pointer}.cb-sandwich{position:absolute;display:inline-block;z-index:1000}.cb-sandwich .cb-bread{display:block;width:28px;height:3px;background-color:#252525;margin:6px 0;border-radius:2px;-webkit-transition:-webkit-transform .25s cubic-bezier(.4,.01,.165,.99);transition:-webkit-transform .25s cubic-bezier(.4,.01,.165,.99);transition:transform .25s cubic-bezier(.4,.01,.165,.99);transition:transform .25s cubic-bezier(.4,.01,.165,.99),-webkit-transform .25s cubic-bezier(.4,.01,.165,.99)}.cb-sandwich .cb-bread:first-child{-webkit-animation:top-bread-reverse .68s forwards;animation:top-bread-reverse .68s forwards}.cb-sandwich .cb-bread:last-child{-webkit-animation:bottom-bread-reverse .68s forwards;animation:bottom-bread-reverse .68s forwards}.cb-sandwich.open .cb-bread:first-child{-webkit-animation:top-bread .68s forwards;animation:top-bread .68s forwards}.cb-sandwich.open .cb-bread:last-child{-webkit-animation:bottom-bread .68s forwards;animation:bottom-bread .68s forwards}.preload *{-webkit-animation:none!important;-moz-animation:none!important;-ms-animation:none!important;-o-animation:none!important;animation:none!important}.cb-menu-item-container{flex-direction:column;position:absolute;top:0;left:0;width:100%;z-index:100;text-align:center;color:#e8e8e8;-webkit-transition:-webkit-transform .68s cubic-bezier(.4,.01,.165,.99);transition:height .68s cubic-bezier(.4,.01,.165,.99);transition:height .68s cubic-bezier(.4,.01,.165,.99),-webkit-transform .68s cubic-bezier(.4,.01,.165,.99);background:#7b7b7b}.cb-menu-item-container ::slotted(*){cursor:pointer;display:block;overflow:hidden}.cb-menu-item-container ::slotted(:hover){color:red}.cb-menu-item-container .cb-menu-more{display:none}@keyframes top-bread{33%{transform:rotate(90deg) translate(8px,-5px)}66%{transform:rotate(90deg) translate(9px)}to{transform:rotate(135deg) translate(4px,-3px)}}@keyframes bottom-bread{33%{transform:rotate(90deg) translate(-1px,4px)}66%{transform:rotate(90deg) translate(0)}to{transform:rotate(45deg) translate(-3px,-2px)}}@keyframes top-bread-reverse{0%{transform:rotate(135deg) translate(4px,-3px)}50%{transform:rotate(180deg) translateY(-6px)}to{transform:rotate(180deg) translate(0)}}@keyframes bottom-bread-reverse{0%{transform:rotate(45deg) translate(-3px,-2px)}50%{transform:rotate(180deg) translateY(2px)}to{transform:rotate(180deg) translate(0)}}", ""]);
 
 // exports
 

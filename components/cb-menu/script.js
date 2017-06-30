@@ -47,6 +47,8 @@ class CBMenu extends HTMLElement {
 
     _applyMenuOpen() {
         let menu = this.shadowRoot.querySelector("#cb-menu");
+        // Remove the preload class that prevents keyframe animation on page load.
+        this.shadowRoot.querySelector('#cb-sandwich').classList.remove("preload");
 
         if (this.menuOpen) {
             // Get # of children, set height to menu item pixel height * # of children
@@ -58,14 +60,9 @@ class CBMenu extends HTMLElement {
             const length = filteredNodes.length;
             //menu.style.maxHeight = length * 24 + 'px';
             //menu.style.maxHeight = menu.scrollHeight + 'px';
-            //transformIcon(this.shadowRoot.querySelector('.mobile-menu-button'));
-            var sandwich = this.shadowRoot.querySelector("#cb-sandwich");
-            // sandwich.firstChild.classList.add(";
-            // var bottom_bread = sandwich.lastChild;
-            sandwich.classList.add("open");
+            this.shadowRoot.querySelector("#cb-sandwich").classList.add("open");
         } else {
             //menu.style.maxHeight = null;
-            //revertIcon(this.shadowRoot.querySelector('.mobile-menu-button'));
             this.shadowRoot.querySelector("#cb-sandwich").classList.remove("open");
         }
     }
