@@ -109,9 +109,20 @@ module.exports = {
     },
     context: path.resolve(__dirname, "components"),
     entry: './bundle.js',
+    // entry: {
+    //     'bundle': './bundle.js',
+    //     'bundle.min': './bundle.js'
+    // },
     output: {
         filename: 'components.js',
         path: path.resolve(__dirname, 'dist')
     },
-    devtool: 'source-map'
+    devtool: 'source-map',
+    // TESTING UGLIFICATION 
+    // plugins: [
+    //     new webpack.optimize.UglifyJSPlugin({
+    //         include: /\.min\.js$/,
+    //         minimize: true
+    //     })
+    // ]
 };

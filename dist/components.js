@@ -131,6 +131,7 @@ class CBMenu extends HTMLElement {
 
     _applyMenuOpen() {
         let menu = this.shadowRoot.querySelector("#cb-menu");
+        // Remove the preload class that prevents keyframe animation on page load.
         this.shadowRoot.querySelector('#cb-sandwich').classList.remove("preload");
 
         if (this.menuOpen) {
