@@ -60,19 +60,89 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__cb_menu_script_js__ = __webpack_require__(1);
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function(useSourceMap) {
+	var list = [];
 
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if(item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
 
-// Menu
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap && typeof btoa === 'function') {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
+}
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+	// eslint-disable-next-line no-undef
+	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+	return '/*# ' + data + ' */';
+}
 
 
 /***/ }),
@@ -80,7 +150,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__template_html__ = __webpack_require__(2);
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__cb_menu_script_js__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__cb_gl_script_js__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__cb_gl_item_script_js__ = __webpack_require__(8);
+
+
+// Menu
+
+
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__template_html__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__template_html___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__template_html__);
 
 
@@ -160,16 +246,16 @@ window.customElements.define('cb-menu', CBMenu);
 window.CBMenu = CBMenu;
 
 /***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = "<style>\n    " + __webpack_require__(3) + "\n</style>\n<div id=\"cb-sandwich\" class=\"preload cb-btn cb-sandwich\">\n    <span class=\"cb-bread\"></span>\n    <span class=\"cb-bread\"></span>\n</div>\n<div id=\"cb-menu\" class=\"cb-menu-item-container\">\n    <!-- Default slot -->\n    <slot class=\"cb-menu-items\"></slot>\n    <div class=\"cb-menu-more\">\n        <!-- if more than 4 menu items, more opens up \n             full page menu with all menu items -->\n        <!-- <slot name=\"more\"></slot>-->\n    </div>\n</div>\n";
-
-/***/ }),
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(4)(undefined);
+module.exports = "<style>\n    " + __webpack_require__(4) + "\n</style>\n<div id=\"cb-sandwich\" class=\"preload cb-btn cb-sandwich\">\n    <span class=\"cb-bread\"></span>\n    <span class=\"cb-bread\"></span>\n</div>\n<div id=\"cb-menu\" class=\"cb-menu-item-container\">\n    <!-- Default slot -->\n    <slot class=\"cb-menu-items\"></slot>\n    <div class=\"cb-menu-more\">\n        <!-- if more than 4 menu items, more opens up \n             full page menu with all menu items -->\n        <!-- <slot name=\"more\"></slot>-->\n    </div>\n</div>\n";
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)(undefined);
 // imports
 
 
@@ -180,85 +266,97 @@ exports.push([module.i, ":host .cb-menu-item-container,:host .cb-menu-item-conta
 
 
 /***/ }),
-/* 4 */
-/***/ (function(module, exports) {
+/* 5 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function(useSourceMap) {
-	var list = [];
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__template_html__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__template_html___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__template_html__);
 
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if(item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
 
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
 
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
 
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
-		});
+class CBGl extends HTMLElement {
 
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
+    constructor() {
+        super();
+        let shadowRoot = this.attachShadow({mode: 'open'});
+        shadowRoot.innerHTML = __WEBPACK_IMPORTED_MODULE_0__template_html___default.a;
+    }
 
-	return [content].join('\n');
+    connectedCallback() {
+
+    }
 }
 
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+window.customElements.define('cb-gl', CBGl);
+window.CBGl = CBGl;
 
-	return '/*# ' + data + ' */';
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = "<style>\n    " + __webpack_require__(7) + "\n</style>\n<div class=\"cb-gl-container\">\n    <slot id=\"slot\"></slot>\n</div>";
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, ":host{max-width:800px;margin:auto}.cb-gl-container{display:flex;flex-direction:row;flex-wrap:wrap}", ""]);
+
+// exports
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__template_html__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__template_html___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__template_html__);
+
+
+
+
+class CBGlItem extends HTMLElement {
+
+    constructor() {
+        super();
+        let shadowRoot = this.attachShadow({mode: 'open'});
+        shadowRoot.innerHTML = __WEBPACK_IMPORTED_MODULE_0__template_html___default.a;
+    }
+
+    connectedCallback() {
+
+    }
 }
+
+window.customElements.define('cb-gl-item', CBGlItem);
+window.CBGlItem = CBGlItem;
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = "<style>\n    " + __webpack_require__(10) + "\n</style>\n<div class=\"cb-gl-item-container\">\n    <div id=\"cb-gl-item-image\">\n        <!-- image container -->\n    </div>\n    <div id=\"cb-gl-item-title\">\n        <!-- title/rating container -->\n        <div>Demo title</div>\n        <span>rating</span>\n    </div>\n</div>";
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, ":host{margin:15px}.cb-gl-item-container{height:175px;width:125px;-webkit-box-shadow:0 2px 5px 0 rgba(0,0,0,.75);-moz-box-shadow:0 2px 5px 0 rgba(0,0,0,.75);box-shadow:0 2px 5px 0 rgba(0,0,0,.75);cursor:pointer}.cb-gl-item-container #cb-gl-item-image{height:115px;background-color:#f3f3f3}.cb-gl-item-container #cb-gl-item-title{height:60px;padding:8px;box-sizing:border-box}.cb-gl-item-container #cb-gl-item-title div:first-child{font-size:18px}.cb-gl-item-container #cb-gl-item-title span{color:#b22222}", ""]);
+
+// exports
 
 
 /***/ })
