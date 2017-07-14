@@ -1,6 +1,10 @@
+@import "../common.scss";
+
 :host {
+    //@include ApercuBold();
+
     .cb-menu-item-container {
-        height: 0;
+        //height: 0;
 
         & ::slotted(*) {
             height: 0;
@@ -10,7 +14,7 @@
 
 :host([menu-open]) {
     .cb-menu-item-container {
-        height: 100%;
+        //height: 100%;
 
         & ::slotted(*) {
             height: auto !important;
@@ -42,7 +46,7 @@
     .cb-bread {
         display: block;
         width: 28px;
-        height: 3px;
+        height: 2px;
         background-color: #252525;
         margin: 6px 0;
         border-radius: 2px;
@@ -85,12 +89,9 @@
 .cb-menu-item-container {
     flex-direction: column;
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
     z-index: 100;
     text-align: center;
-    color: #e8e8e8;
+    color: #fff;
 
     -webkit-transition: -webkit-transform 0.68s cubic-bezier(0.4, 0.01, 0.165, 0.99);
     transition: height 0.68s cubic-bezier(0.4, 0.01, 0.165, 0.99);
@@ -98,7 +99,7 @@
     transition: height 0.68s cubic-bezier(0.4, 0.01, 0.165, 0.99), 
                 -webkit-transform 0.68s cubic-bezier(0.4, 0.01, 0.165, 0.99);
     
-    background: #7b7b7b;
+    background: #1d73ab;
 
     //background: #2c3e50; /* For browsers that do not support gradients */
     // background: -webkit-linear-gradient(top left, rgba(41, 128, 185, .6), rgba(44, 62, 80, .6));
@@ -119,6 +120,63 @@
 
     .cb-menu-more {
         display: none;
+    }
+}
+
+@media (max-width: 767px) {
+    :host {
+        .cb-menu-item-container {
+            height: 0;
+        }
+    }
+    :host([menu-open]) {
+        .cb-menu-item-container {
+            height: 100%;
+        }
+    }
+    .cb-menu-item-container {
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+    .cb-menu-item-container {
+        
+    }
+}
+
+@media (min-width: 768px) {
+    :host {
+        .cb-menu-item-container {
+            //display: none;
+            transform: perspective(1500px) rotateY(-75deg) translateX(-400px) translateZ(140px);
+            //left: -125px;
+        }
+    }
+    :host([menu-open]) {
+        .cb-menu-item-container {
+            //display: flex;
+            transform: perspective(1500px) rotateY(0deg) translateX(0px) translateZ(0px);
+            left: 25px;
+        }
+    }
+    .cb-menu-item-container {
+        height: 80%;
+        top: 10%;
+        bottom: 10%;
+        //left: 25px;
+        width: 33%;
+        max-width: 400px;
+
+        @include box-shadow();
+    }
+}
+
+@media (min-width: 1200px) {
+    .cb-menu-item-container {
+        
     }
 }
 

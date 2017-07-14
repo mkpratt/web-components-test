@@ -1,0 +1,20 @@
+// @font-face {
+//     font-family: Apercu;
+//     src: url("../fonts/ApercuRegular.otf");
+// }
+// @font-face {
+//     font-family: Apercu;
+//     src: url("../fonts/ApercuBold.otf");
+//     font-weight: bold;
+// }
+
+// @mixin ApercuBold() {
+//     font-family: Apercu;
+//     font-weight: bold;
+// }
+
+@mixin box-shadow() {
+    -webkit-box-shadow: 0px 4px 13px 0px rgba(0,0,0,0.68);
+    -moz-box-shadow: 0px 4px 13px 0px rgba(0,0,0,0.68);
+    box-shadow: 0px 4px 13px 0px rgba(0,0,0,0.68);
+}

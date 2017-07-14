@@ -52,19 +52,25 @@ module.exports = {
                         // removeComments: true,
                         // collapseWhitespace: true
                     },
-                },
+                }
             },
             {
                 test: /\.scss$/,
-                use: [{
-                    loader: "css-loader",
-                    options: {
-                        minimize: true
+                use: [
+                    {
+                        loader: "css-loader",
+                        options: {
+                            minimize: true
+                        }
+                    }, {
+                        loader: "sass-loader" // compiles Sass to CSS
                     }
-                }, {
-                    loader: "sass-loader" // compiles Sass to CSS
-                }]
+                ]
             },
+            // {
+            //     test: /\.(otf|eot|svg|ttf|woff|woff2)$/,
+            //     loader: 'file-loader?name=/fonts/[name].[ext]'
+            // },
             // {
             //     test: /\.(gif|png|jpe?g)$/i,
             //     use: [
